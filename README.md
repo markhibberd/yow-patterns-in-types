@@ -1,15 +1,19 @@
-# lambdajam
-## Patterns in Types: A Look at Reader, Writer and State in Scala
+# yow 2013
+## Introduction to FP in Scala
 
-This is the base project for "Pattern in Types" jam, for the LambdaJam
-Australia conference.
+This is the base project for the workshow.
 
 __note__: please test your environment before you arrive so we can get
 started quickly on the day.
 
 __note__: test you environment as soon as possible, but please grab the
-latest copy of this repository the day before the jam with a `git pull origin master`.
+latest copy of this repository the day before the workshop with a `git pull origin master`.
 
+
+## Warmpup
+
+We will use the list exercises to introduce some basic FP concepts
+and scala syntax.
 
 ## The Challenges
 
@@ -75,6 +79,12 @@ This challenge presents two styles in 8a and 8b.
 8b uses a transformer stack to encode reader/writer/state/result for a Http data type.
 
 
+### Challenge 9
+
+The 9th and final challenge is to implement test and runtime interpretters for the Http
+stack in challenge 8.
+
+
 ## Working with the code.
 
  - Challenges are in roughly increasing difficulty.
@@ -96,17 +106,6 @@ git merge origin/challenge6
 git diff origin/challenge2 src/main/scala/challenge2
 ```
 
- - You are encouraged to jump in at a level which you feel comfortable.
-   So starting at 1 or at 8 is fine.
-
- - If you are really confident, I challenge you to implement __all__
-   exercises in the allocted time. It is possible ;)
-
- - If at any point you skipped ahead and are having trouble, try
-   going back and doing some of the early challenges.
-
-
-
 
 ## Getting started
 
@@ -126,16 +125,16 @@ Pre requisuites.
 
 Getting scala and validating your environment (for unix):
 
-    git clone https://github.com/markhibberd/lambdajam-patterns-in-types.git
-    cd lambdajam-patterns-in-types
-    ./sbt test
+    git clone https://github.com/markhibberd/yow-patterns-in-types.git
+    cd yow-patterns-in-types
+    ./sbt test:compile
 
 
 Getting scala and validating your environment (for windows):
 
-    git clone https://github.com/markhibberd/lambdajam-patterns-in-types.git
-    cd lambdajam-patterns-in-types
-    sbt test
+    git clone https://github.com/markhibberd/yow-patterns-in-types.git
+    cd yow-patterns-in-types
+    sbt test:compile
 
 
 For either platform this may take a few minutes. It will:
