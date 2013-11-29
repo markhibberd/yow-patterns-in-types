@@ -40,19 +40,17 @@ object Equal {
         Equal[A].equal(a1, a2) && Equal[B].equal(b1, b2)
     })
 
+  implicit def Tuple3Equal[A: Equal, B: Equal, C: Equal] =
+    from[(A, B, C)]({
+      case ((a1, b1, c1), (a2, b2, c2)) =>
+        Equal[A].equal(a1, a2) && Equal[B].equal(b1, b2) && Equal[C].equal(c1, c2)
+    })
+
+
   implicit def ThrowableEqual =
     derived[Throwable]
 }
 
-case class EqualSyntax[A](value: A) {
-  def ===(other: A)(implicit A: Equal[A]) =
-    Equal[A].equal(value, other)
-}
-
-object EqualSyntax {
-  implicit def ToEqualSyntax[A](value: A) =
-    EqualSyntax(value)
-}
 
 object EqualLaws {
   def commutative[A: Equal](a1: A, a2: A): Boolean =

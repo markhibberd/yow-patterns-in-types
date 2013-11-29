@@ -1,6 +1,6 @@
 package challenge3
 
-import challenge0._, EqualSyntax._
+import challenge0._, Syntax._
 
 object Challenge3Spec extends test.Spec {
   import Laws._
@@ -20,5 +20,7 @@ object Challenge3Spec extends test.Spec {
         _ <- tell(i)
         _ <- tell(j)
       } yield ()) === Writer(i ++ j, ()))
+
+    "satisfy monoid laws" ! monoid.laws[Writer[List[Int], List[Int]]]
   }
 }

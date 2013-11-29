@@ -131,7 +131,7 @@ object Http {
    * Hint: You may want to use httpModify.
    */
   def addHeader(name: String, value: String): Http[Unit] =
-    httpModify(s => s.copy(resheaders = s.resheaders :+ (name, value)))
+    httpModify(s => s.copy(resheaders = s.resheaders :+ (name -> value)))
 
   /*
    * Exercise 8b.10:
@@ -142,6 +142,12 @@ object Http {
    */
   def log(message: String): Http[Unit] =
     httpTell(HttpWrite(Vector(message)))
+
+  implicit def HttpMonad: Monad[Http] =
+    new Monad[Http] {
+      def point[A](a: => A) = Http.value(a)
+      def bind[A, B](a: Http[A])(f: A => Http[B]) = a flatMap f
+  }
 }
 
 object HttpExample {

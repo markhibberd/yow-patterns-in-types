@@ -1,6 +1,6 @@
 package challenge3
 
-import challenge0._, EqualSyntax._
+import challenge0._, Syntax._
 
 /*
  * A writer data type that represents the pair of some
@@ -45,7 +45,7 @@ object Writer {
    *
    * Hint: Try using Writer constructor.
    */
-  def value[W: Monoid, A](a: A) =
+  def value[W: Monoid, A](a: A): Writer[W, A] =
     Writer(Monoid[W].zero, a)
 
   /*
@@ -69,10 +69,17 @@ object Writer {
 
   implicit def WriterMonad[W: Monoid]: Monad[Writer_[W]#l] =
     new Monad[Writer_[W]#l] {
-      def point[A](a: => A) = value(a)
+      def point[A](a: => A) = value[W, A](a)
       def bind[A, B](a: Writer[W, A])(f: A => Writer[W, B]) = a flatMap f
     }
 
   implicit def WriterEqual[W: Equal, A: Equal] =
-    Equal.from[Writer[W, A]]((a, b) => (a.log, a.value)  === (b.log, b.value))
+    Equal.from[Writer[W, A]]((a, b) => (a.log -> a.value) === (b.log -> b.value))
+
+  implicit def WriterMoniod[W: Monoid, A: Monoid]: Monoid[Writer[W, A]] =
+    new Monoid[Writer[W, A]] {
+      def zero = Writer.value[W, A](Monoid[A].zero)
+      def append(l: Writer[W, A], r: => Writer[W, A]) =
+        Writer(Monoid[W].append(l.log, r.log), Monoid[A].append(l.value, r.value))
+    }
 }

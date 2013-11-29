@@ -1,6 +1,6 @@
 package challenge2
 
-import challenge0._, EqualSyntax._
+import challenge0._, Syntax._
 
 object Challenge2Spec extends test.Spec {
   import Laws._
@@ -15,6 +15,8 @@ object Challenge2Spec extends test.Spec {
 
     "modify environment for local" ! prop((i: Int) =>
       local[Int, Int](_ * 2)(ask[Int]).run(i) == i * 2)
+
+    "satisfy monoid laws" ! monoid.laws[Reader[Int, List[Int]]]
   }
 
   implicit def ReaderEqual[A: Equal]: Equal[Reader[Int, A]] =

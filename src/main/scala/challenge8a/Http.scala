@@ -102,7 +102,7 @@ object Http {
    *       that have not been specified yet, remember exercise 4 update?
    */
   def addHeader(name: String, value: String): Http[Unit] =
-    httpModify(s => s.copy(resheaders = s.resheaders :+ (name, value)))
+    httpModify(s => s.copy(resheaders = s.resheaders :+ (name -> value)))
 
   /*
    * Exercise 8a.9:
@@ -113,6 +113,12 @@ object Http {
    */
   def log(message: String): Http[Unit] =
     Http((_, s) => (HttpWrite(Vector(message)), s, HttpValue.ok(())))
+
+  implicit def HttpMonad: Monad[Http] =
+    new Monad[Http] {
+      def point[A](a: => A) = Http.value(a)
+      def bind[A, B](a: Http[A])(f: A => Http[B]) = a flatMap f
+  }
 }
 
 object HttpExample {
