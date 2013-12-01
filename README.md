@@ -3,7 +3,7 @@
 
 This is the base project for the workshow.
 
-__note__: please test you environment as soon as possible, but remember to grab the
+__note__: please test your environment as soon as possible, but remember to grab the
 latest copy of this repository the day before the workshop with a `git pull origin master`.
 
 ### Core
