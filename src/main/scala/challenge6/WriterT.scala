@@ -89,8 +89,6 @@ object WriterT {
    *
    * Hint: Try using WriterT constructor and Monad[M].map(ga).
    */
-  implicit def WriterTMonadTrans[W:Monoid]: MonadTrans[WriterT__[W]#l] = new MonadTrans[WriterT__[W]#l] {
-    def liftM[M[_]: Monad, A](ga: M[A]): WriterT[M, W, A] =
-      WriterT(Monad[M].map(ga)(a => (Monoid[W].zero, a)))
-  }
+  implicit def WriterTMonadTrans[W:Monoid]: MonadTrans[WriterT__[W]#l] =
+    ???
 }
