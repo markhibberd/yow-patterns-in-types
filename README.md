@@ -9,24 +9,20 @@ started quickly on the day.
 __note__: test you environment as soon as possible, but please grab the
 latest copy of this repository the day before the workshop with a `git pull origin master`.
 
+### Core
 
-## Warmpup
+The `core` package contains no coding exercise, but provides a set
+of useful abstractions that we will build on top of as we progress.
+It is not necessary to study these in detail, but it may be useful
+to keep this package in mind when implementing some of other challenges.
 
-We will use the list exercises to introduce some basic FP concepts
-and scala syntax.
 
 ## The Challenges
 
-### Challenge 0
+## Warmup
 
-Challenge 0 contains no coding exercise, but is just there for you
-to become somewhat familiar with the type class hierarchy provided.
-
-See:
- - Functor
- - Monad
- - Monoid
- - MonadTrans
+We will use the list exercises to introduce some basic FP concepts
+and scala syntax.
 
 ### Challenge 1
 
@@ -120,7 +116,7 @@ Pre requisuites.
 
  1. A valid install of java 6+
  2. git
- 3. **if you are windows only** install sbt using the [msi installer](http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.12.3/sbt.msi)
+ 3. **if you are windows only** install sbt using the [msi installer](http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.0/sbt.msi)
 
 
 Getting scala and validating your environment (for unix):

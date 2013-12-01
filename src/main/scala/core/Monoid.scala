@@ -1,4 +1,4 @@
-package challenge0
+package core
 
 trait Monoid[A] {
   def zero: A

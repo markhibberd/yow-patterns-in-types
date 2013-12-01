@@ -1,6 +1,6 @@
 package challenge8a
 
-import challenge0._
+import core._
 
 /*
  * A http datatype that represents a number of read/write/state/result
@@ -108,9 +108,9 @@ object Http {
 
   implicit def HttpMonad: Monad[Http] =
     new Monad[Http] {
-      def point[A](a: => A) = ???
-      def bind[A, B](a: Http[A])(f: A => Http[B]) = ???
-    }
+      def point[A](a: => A) = Http.value(a)
+      def bind[A, B](a: Http[A])(f: A => Http[B]) = a flatMap f
+  }
 }
 
 object HttpExample {

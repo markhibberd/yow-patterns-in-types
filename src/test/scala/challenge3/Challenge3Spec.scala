@@ -1,6 +1,6 @@
 package challenge3
 
-import challenge0._, EqualSyntax._
+import core._, Syntax._
 
 object Challenge3Spec extends test.Spec {
   import Laws._
@@ -12,9 +12,8 @@ object Challenge3Spec extends test.Spec {
 
     "satisfy monad laws" ! monad.laws[Writer_[List[Int]]#l]
 
-    "return zero for value" ! prop { (i: Int) =>
-      Writer.value[List[Int], Int](i) === Writer(Monoid[List[Int]].zero, i)
-    }
+    "return zero for value" ! prop((i: Int) =>
+      Writer.value[List[Int], Int](i) === Writer(Monoid[List[Int]].zero, i))
 
     "tell appends" ! prop((i: List[Int], j: List[Int]) =>
       (for {

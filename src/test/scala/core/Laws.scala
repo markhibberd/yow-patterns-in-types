@@ -1,4 +1,4 @@
-package challenge0
+package core
 
 import org.scalacheck.{Arbitrary, Gen, Prop, Properties}
 import Prop.forAll

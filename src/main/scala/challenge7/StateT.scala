@@ -1,6 +1,6 @@
 package challenge7
 
-import challenge0._
+import core._
 
 /*
  * A state data type that represents the threading
@@ -114,8 +114,6 @@ object StateT {
    *
    * Hint: Try using StateT constructor and Monad[M].map(ga).
    */
-  implicit def StateTMonadTrans[S]: MonadTrans[StateT__[S]#l] = new MonadTrans[StateT__[S]#l] {
-    def liftM[M[_]: Monad, A](ga: M[A]): StateT[M, S, A] =
-      ???
-  }
+  implicit def StateTMonadTrans[S]: MonadTrans[StateT__[S]#l] =
+    ???
 }

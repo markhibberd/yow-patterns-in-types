@@ -1,4 +1,4 @@
-package challenge0
+package core
 
 object MonoidSpec extends test.Spec {
   import Laws._

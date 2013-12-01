@@ -1,6 +1,6 @@
 package challenge5
 
-import challenge0._
+import core._
 
 /*
  * A reader data type in transformer form that represents the application of some

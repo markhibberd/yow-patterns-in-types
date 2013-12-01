@@ -1,6 +1,6 @@
 package challenge6
 
-import challenge0._, EqualSyntax._
+import core._, Syntax._
 
 /*
  * A writer data type in transformer form that represents the pair of some
@@ -89,8 +89,6 @@ object WriterT {
    *
    * Hint: Try using WriterT constructor and Monad[M].map(ga).
    */
-  implicit def WriterTMonadTrans[W:Monoid]: MonadTrans[WriterT__[W]#l] = new MonadTrans[WriterT__[W]#l] {
-    def liftM[M[_]: Monad, A](ga: M[A]): WriterT[M, W, A] =
-      ???
-  }
+  implicit def WriterTMonadTrans[W:Monoid]: MonadTrans[WriterT__[W]#l] =
+    ???
 }

@@ -1,6 +1,6 @@
 package challenge8b
 
-import challenge0._
+import core._
 
 sealed trait HttpValue[A] {
   def fold[X](

@@ -1,6 +1,6 @@
 package challenge3
 
-import challenge0._, EqualSyntax._
+import core._, Syntax._
 
 /*
  * A writer data type that represents the pair of some
@@ -51,7 +51,7 @@ object Writer {
    *
    * Implement tell.
    *
-   * Tell appends the writer content w and produces no value.
+   * Tell produces the writer content w and produces no value.
    *
    * Hint: Try using Writer constructor.
    */
@@ -72,11 +72,12 @@ object Writer {
     }
 
   implicit def WriterEqual[W: Equal, A: Equal] =
-    Equal.from[Writer[W, A]]((a, b) => (a.log, a.value)  === (b.log, b.value))
+    Equal.from[Writer[W, A]]((a, b) => (a.log -> a.value) === (b.log -> b.value))
 
   implicit def WriterMoniod[W: Monoid, A: Monoid]: Monoid[Writer[W, A]] =
     new Monoid[Writer[W, A]] {
-      def zero = ???
-      def append(l: Writer[W, A], r: => Writer[W, A]) = ???
+      def zero = Writer.value[W, A](Monoid[A].zero)
+      def append(l: Writer[W, A], r: => Writer[W, A]) =
+        Writer(Monoid[W].append(l.log, r.log), Monoid[A].append(l.value, r.value))
     }
 }

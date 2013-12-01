@@ -1,9 +1,13 @@
-package challenge0
+package core
 
-trait Monad[F[_]] extends Functor[F] {
+trait Monad[F[_]] extends Applicative[F] {
   def point[A](a: => A): F[A]
   def bind[A, B](a: F[A])(f: A => F[B]): F[B]
+
   def map[A, B](a: F[A])(f: A => B): F[B] = bind(a)(b => point(f(b)))
+
+  def pure[A](a: => A) = point(a)
+  def ap[A, B](fa: F[A])(fab: F[A => B]): F[B] = bind(fa)(a => map(fab)(f => f(a)))
 }
 
 object Monad {
@@ -19,17 +23,8 @@ object Monad {
     def point[A](a: => A) = List(a)
     def bind[A, B](a: List[A])(f: A => List[B]): List[B] = a flatMap f
   }
-
-  implicit class MonadOps[M[_]: Monad, A](a: M[A]) {
-    def map[B](f: A => B) =
-      Monad[M].map(a)(f)
-
-    def flatMap[B](f: A => M[B]) =
-      Monad[M].bind(a)(f)
-      
-    def filter(f: A => Boolean) = a
-  }
 }
+
 
 object MonadLaws {
   def associative[F[_], A, B, C](fa: F[A], f: A => F[B], g: B => F[C])(implicit FC: Equal[F[C]], F: Monad[F]): Boolean =

@@ -1,6 +1,6 @@
 package challenge8b
 
-import challenge0._ // type classes
+import core._ // type classes
 import challenge1._ // result
 import challenge5._ // ReaderT
 import challenge6._ // WriterT
@@ -82,7 +82,7 @@ object Http {
    *
    * Hint: Try using Http constructor, StateT get MonadTrans.liftM (twice).
    *
-   * Hint Hint: liftM a type signature is:
+   * Hint Hint: liftM type signature is:
    *
    *     liftM[F[_[_], _], G[_], A](g: G[A])
    *
@@ -93,7 +93,7 @@ object Http {
    *     liftM[W_, SV, HttpState](???): WSV[HttpState]
    */
   def httpGet: Http[HttpState] =
-    /**   FREE ANSWER, so you don't get too hung up on syntax, next one is for you */
+    /** FREE ANSWER, so you don't get too hung up on syntax, next one is for you */
     Http(
       liftM[R_, WSV, HttpState](
         liftM[W_, SV, HttpState](
@@ -105,7 +105,8 @@ object Http {
    * Implement modify for a Http.
    *
    * Hint: Try using Http constructor, StateT modify MonadTrans.liftM (twice).
-   * Hint Hint: liftM a type signature is:
+   *
+   * Hint Hint: liftM type signature is:
    *
    *     liftM[F[_[_], _], G[_], A](g: G[A])
    *
@@ -124,15 +125,6 @@ object Http {
    * Implement get for a Http.
    *
    * Hint: Try using Http constructor, HttpWriteT tell MonadTrans.liftM (once).
-   *
-   * Hint Hint: liftM a type signature is:
-   *
-   *     liftM[F[_[_], _], G[_], A](g: G[A])
-   *
-   * Hint Hint Hint: You will have to explicitly specify types for liftM and
-   * there are convenience type aliases above R_, and W_ above that will help.
-   *
-   *     liftM[R_, WSV, Unit]
    */
   def httpTell(w: HttpWrite): Http[Unit] =
     ???
@@ -169,9 +161,9 @@ object Http {
 
   implicit def HttpMonad: Monad[Http] =
     new Monad[Http] {
-      def point[A](a: => A) = ???
-      def bind[A, B](a: Http[A])(f: A => Http[B]) = ???
-    }
+      def point[A](a: => A) = Http.value(a)
+      def bind[A, B](a: Http[A])(f: A => Http[B]) = a flatMap f
+  }
 }
 
 object HttpExample {
