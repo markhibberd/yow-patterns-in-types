@@ -93,7 +93,11 @@ object Http {
    *     liftM[W_, SV, HttpState](???): WSV[HttpState]
    */
   def httpGet: Http[HttpState] =
-    ???
+    /** FREE ANSWER, so you don't get too hung up on syntax, next one is for you */
+    Http(
+      liftM[R_, WSV, HttpState](
+        liftM[W_, SV, HttpState](
+          get[V, HttpState])))
 
   /*
    * Exercise 8b.6:
