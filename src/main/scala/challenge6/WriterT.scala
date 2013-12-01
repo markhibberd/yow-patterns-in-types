@@ -63,7 +63,7 @@ object WriterT {
    *
    * Implement tell.
    *
-   * Tell appends the writer content w and produces no value.
+   * Tell produces the writer content w and produces no value.
    */
   def tell[M[_]: Monad, W](w: W): WriterT[M, W, Unit] =
     writer[M, W, Unit](())(w)
