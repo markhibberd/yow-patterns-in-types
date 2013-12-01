@@ -1,4 +1,4 @@
-package challenge0
+package core
 
 trait MonadTrans[F[_[_], _]] {
   def liftM[G[_]: Monad, A](g: G[A]): F[G, A]

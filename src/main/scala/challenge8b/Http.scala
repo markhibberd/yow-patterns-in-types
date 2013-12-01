@@ -1,6 +1,6 @@
 package challenge8b
 
-import challenge0._ // type classes
+import core._ // type classes
 import challenge1._ // result
 import challenge5._ // ReaderT
 import challenge6._ // WriterT

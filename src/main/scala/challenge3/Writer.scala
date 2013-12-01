@@ -1,6 +1,6 @@
 package challenge3
 
-import challenge0._, Syntax._
+import core._, Syntax._
 
 /*
  * A writer data type that represents the pair of some

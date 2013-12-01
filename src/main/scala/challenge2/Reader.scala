@@ -1,6 +1,6 @@
 package challenge2
 
-import challenge0._
+import core._
 
 /*
  * A reader data type that represents the application of some

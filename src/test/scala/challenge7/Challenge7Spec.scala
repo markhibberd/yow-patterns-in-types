@@ -1,6 +1,6 @@
 package challenge7
 
-import challenge0._, Syntax._
+import core._, Syntax._
 
 object Challenge7Spec extends test.Spec {
   import Laws._

@@ -1,4 +1,4 @@
-package challenge0
+package core
 
 object Syntax {
   implicit class MonadSyntax[M[_]: Monad, A](a: M[A]) {

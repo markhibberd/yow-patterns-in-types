@@ -1,4 +1,4 @@
-package challenge0
+package core
 
 case class Id[A](run: A) {
   def map[B](f: A => B): Id[B] =

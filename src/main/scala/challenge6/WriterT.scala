@@ -1,6 +1,6 @@
 package challenge6
 
-import challenge0._, Syntax._
+import core._, Syntax._
 
 /*
  * A writer data type in transformer form that represents the pair of some

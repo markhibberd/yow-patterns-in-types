@@ -1,6 +1,6 @@
 package challenge6
 
-import challenge0._
+import core._
 import org.scalacheck.{Arbitrary, Gen}, Arbitrary._, Gen._
 
 object WriterTArbitraries {

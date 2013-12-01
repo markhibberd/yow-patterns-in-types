@@ -1,6 +1,6 @@
 package challenge8b
 
-import challenge0._, Syntax._
+import core._, Syntax._
 import challenge7._
 
 object Challenge8bSpec extends test.Spec {

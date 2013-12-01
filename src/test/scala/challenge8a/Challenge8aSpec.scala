@@ -1,6 +1,6 @@
 package challenge8a
 
-import challenge0._, Syntax._
+import core._, Syntax._
 
 class Challenge8aSpec extends test.Spec {
   import Laws._

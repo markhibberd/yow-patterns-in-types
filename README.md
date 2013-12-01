@@ -9,24 +9,21 @@ started quickly on the day.
 __note__: test you environment as soon as possible, but please grab the
 latest copy of this repository the day before the workshop with a `git pull origin master`.
 
+### Core
 
-## Warmpup
+The `core` package contains no coding exercise, but provides a set
+of useful abstractions that we will build on top of as we progress.
+It is not necessary to study these in detail, but it may be useful
+to keep this package in mind when implementing some of other challenges.
+
+
+## The Challenges
+
+## Warmup
 
 We will use the list exercises to introduce some basic FP concepts
 and scala syntax.
 
-## The Challenges
-
-### Challenge 0
-
-Challenge 0 contains no coding exercise, but is just there for you
-to become somewhat familiar with the type class hierarchy provided.
-
-See:
- - Functor
- - Monad
- - Monoid
- - MonadTrans
 
 ### Challenge 1
 

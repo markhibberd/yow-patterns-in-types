@@ -1,6 +1,6 @@
 package challenge8a
 
-import challenge0._
+import core._
 import org.scalacheck.{Arbitrary, Gen}, Arbitrary._, Gen._
 
 object HttpArbitraries {

@@ -1,6 +1,6 @@
 package challenge8a
 
-import challenge0._
+import core._
 
 /*
  * A http datatype that represents a number of read/write/state/result

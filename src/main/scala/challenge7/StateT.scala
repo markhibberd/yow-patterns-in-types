@@ -1,6 +1,6 @@
 package challenge7
 
-import challenge0._
+import core._
 
 /*
  * A state data type that represents the threading

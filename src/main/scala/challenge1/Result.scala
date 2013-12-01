@@ -1,6 +1,6 @@
 package challenge1
 
-import challenge0._, Syntax._
+import core._, Syntax._
 
 
 /*

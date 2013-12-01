@@ -1,4 +1,4 @@
-package challenge0
+package core
 
 trait Monad[F[_]] extends Functor[F] {
   def point[A](a: => A): F[A]
