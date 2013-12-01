@@ -87,19 +87,7 @@ object Reader {
     }
 
 
-  // Aside: You may be unfamliar with the type trick above, Reader_[R]#l. but
-  //        may have seen its more common (inline) form, refered to as a
-  //        'type lambda', i.e.
-  //           ({type λ[α] = Reader[R, α]})#λ
-  //
-  //        What this does (in both examples) is use path dependent types to
-  //        express partial application of a type constructor. In the example
-  //        Reader is a type constructor that takes two arguments, R and A, but we want
-  //        to refer to the monad, Reader[R, _] that only has a single type
-  //        argument. The 'type lambda' version creeates an anonymous structural
-  //        type, the long form uses a standard named class.
-
-  class Reader_[R] {
+ class Reader_[R] {
     type l[a] = Reader[R, a]
   }
 
