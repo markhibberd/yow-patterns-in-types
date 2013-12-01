@@ -69,19 +69,6 @@ object Reader {
   def local[R, A](f: R => R)(reader: Reader[R, A]): Reader[R, A] =
     Reader(r => reader.run(f(r)))
 
-  class Reader_[R] {
-    type l[a] = Reader[R, a]
-  }
-
-  implicit def ReaderMonad[R]: Monad[Reader_[R]#l] =
-    new Monad[Reader_[R]#l] {
-      def point[A](a: => A): Reader[R, A] =
-        value(a)
-
-      def bind[A, B](r: Reader[R, A])(f: A => Reader[R, B]) =
-        r flatMap f
-    }
-
   /*
    * Exercise 2.6:
    *
@@ -111,4 +98,17 @@ object Reader {
   //        to refer to the monad, Reader[R, _] that only has a single type
   //        argument. The 'type lambda' version creeates an anonymous structural
   //        type, the long form uses a standard named class.
+
+  class Reader_[R] {
+    type l[a] = Reader[R, a]
+  }
+
+  implicit def ReaderMonad[R]: Monad[Reader_[R]#l] =
+    new Monad[Reader_[R]#l] {
+      def point[A](a: => A): Reader[R, A] =
+        value(a)
+
+      def bind[A, B](r: Reader[R, A])(f: A => Reader[R, B]) =
+        r flatMap f
+    }
 }

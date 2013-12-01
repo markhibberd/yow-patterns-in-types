@@ -153,3 +153,39 @@ object Result {
       a => b.fold(_ => false, _ === a)
     ))
 }
+
+
+/*
+ * *Challenge* Exercise 1.5:
+ *
+ * Given three methods which may succeed or fail:
+ *  - data
+ *  - count
+ *  - user
+ *
+ * If the user is valid:
+ *  - produce the string representing the user.
+ * Otherwise, if the data and count are ok:
+ *  - produce a string of the data and count concatenated together
+ * Otherwise:
+ *  - produce the string "bogus"
+ */
+object Example {
+
+  case class Input(path: String, data: String, count: Int, user: String, auth: Boolean)
+
+  /* Extract data if path is valid */
+  def data(input: Input): Result[String] =
+    if (input.path == "/valid") Result.ok(input.data) else Result.fail(NotFound)
+
+  /* Extract count iff we have greater than 0 */
+  def count(input: Input): Result[Int] =
+    if (input.count > 10) Result.ok(input.count) else Result.fail(InvalidRequest)
+
+  /* Extract user if it authorized */
+  def user(input: Input): Result[String] =
+    if (input.auth) Result.ok(input.user) else Result.fail(Unauthorized)
+
+  def answer(input: Input) =
+    (user(input) ||| (for { d <- data(input); c <- count(input) } yield d + c.toString)).getOrElse("bogus")
+}
