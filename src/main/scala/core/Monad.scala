@@ -1,9 +1,13 @@
 package core
 
-trait Monad[F[_]] extends Functor[F] {
+trait Monad[F[_]] extends Applicative[F] {
   def point[A](a: => A): F[A]
   def bind[A, B](a: F[A])(f: A => F[B]): F[B]
+
   def map[A, B](a: F[A])(f: A => B): F[B] = bind(a)(b => point(f(b)))
+
+  def pure[A](a: => A) = point(a)
+  def ap[A, B](fa: F[A])(fab: F[A => B]): F[B] = bind(fa)(a => map(fab)(f => f(a)))
 }
 
 object Monad {

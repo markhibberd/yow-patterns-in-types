@@ -24,7 +24,6 @@ to keep this package in mind when implementing some of other challenges.
 We will use the list exercises to introduce some basic FP concepts
 and scala syntax.
 
-
 ### Challenge 1
 
 Implement the missing methods from the Result data type.

@@ -6,6 +6,10 @@ object Challenge1Spec extends test.Spec {
   import Laws._
   import ResultArbitraries._
 
+  "Equal" should {
+    "satisfy equal laws" ! equal.laws[Error]
+  }
+
   "Result" should {
     "satisfy equal laws with Int" ! equal.laws[Result[Int]]
 
@@ -13,13 +17,22 @@ object Challenge1Spec extends test.Spec {
 
     "satisfy monad laws" ! monad.laws[Result]
 
-    "fold with explosion" ! prop((t: Throwable) =>
-      Result.explosion[Int](t).fold(_ == t, _ => false, _ => false))
+    "Ok#getOrElse always returns value" ! prop((i: Int, j: Int) =>
+      Ok(i).getOrElse(j) == i)
 
-    "fold with fail" ! prop((s: String) =>
-      Result.fail[Int](s).fold(_ => false, _ === s, _ => false))
+    "Fail#getOrElse always returns value" ! prop((e: Error, j: Int) =>
+      Fail[Int](e).getOrElse(j) == j)
+
+    "Ok ||| x always returns value" ! prop((i: Int, r: Result[Int]) =>
+      (Ok(i) ||| r) == Ok(i))
+
+    "Fail ||| x always returns alternative" ! prop((e: Error, r: Result[Int]) =>
+      (Fail[Int](e) ||| r) == r)
+
+    "fold with fail" ! prop((e: Error) =>
+      Result.fail[Int](e).fold(_ === e, _ => false))
 
     "fold with ok" ! prop((i: Int) =>
-      Result.ok[Int](i).fold(_ => false, _ => false, _ === i))
+      Result.ok[Int](i).fold(_ => false, _ === i))
   }
 }
