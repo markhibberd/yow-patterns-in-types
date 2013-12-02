@@ -17,6 +17,7 @@ case class Reader[R, A](run: R => A) {
    *  1) r.map(z => z) == r
    *  2) r.map(z => f(g(z))) == r.map(g).map(f)
    *
+   * Two readers are equal if for all inputs, the same result is produced.
    */
   def map[B](f: A => B): Reader[R, B] =
     ???
@@ -29,6 +30,7 @@ case class Reader[R, A](run: R => A) {
    * The following law must hold:
    *   r.flatMap(f).flatMap(g) == r.flatMap(z => f(z).flatMap(g))
    *
+   * Two readers are equal if for all inputs, the same result is produced.
    */
   def flatMap[B](f: A => Reader[R, B]): Reader[R, B] =
     ???
