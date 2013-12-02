@@ -100,3 +100,20 @@ object Reader {
         r flatMap f
     }
 }
+
+
+/*
+ * *Challenge* Exercise 2.7: Header count.
+ *
+ * Complete the implementation, some of the methods are provided
+ * fill in the remainder, to complete the spec.
+ */
+object Example {
+
+  case class Header(name: String, value: String)
+
+
+  def find: Reader[List[Header], Option[Header]] =
+    ???
+
+}
