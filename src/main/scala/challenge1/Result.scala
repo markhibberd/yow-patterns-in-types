@@ -154,36 +154,67 @@ object Result {
 
 
 /*
- * *Challenge* Exercise 1.5:
+ * *Challenge* Exercise 1.5: The worlds most trivial HTTP calculator.
  *
- * Given three methods which may succeed or fail:
- *  - data
- *  - count
- *  - user
+ * We are implementing a way to compute a number via a HTTP like
+ * API.
+ *  - We will send a method which is one of GET|POST|PUT|DELETE.
+ *  - We want to send an integer as a request body.
+ *  - We will send a path of what calculation to use.
  *
- * If the user is valid:
- *  - produce the string representing the user.
- * Otherwise, if the data and count are ok:
- *  - produce a string of the data and count concatenated together
- * Otherwise:
- *  - produce the string "bogus"
+ * Complete the implementation, some of the methods are provided
+ * with type signatures to get started.
  */
 object Example {
 
-  case class Input(path: String, data: String, count: Int, user: String, auth: Boolean)
+  /** Simplified method data type. */
+  sealed trait Method
+  case object Get extends Method
+  case object Post extends Method
+  case object Put extends Method
+  case object Delete extends Method
 
-  /* Extract data if path is valid */
-  def data(input: Input): Result[String] =
-    if (input.path == "/valid") Result.ok(input.data) else Result.fail(NotFound)
+  /*
+   * Parse the method if it is valid, otherwise fail with InvalidRequest.
+   *
+   * Hint: Scala defines String#toInt, but warning it throws exceptions if it is not a valid Int :|
+   */
+  def request(body: String): Result[Int] =
+    ???
 
-  /* Extract count iff we have greater than 0 */
-  def count(input: Input): Result[Int] =
-    if (input.count > 10) Result.ok(input.count) else Result.fail(InvalidRequest)
+  /* Parse the method if it is valid, otherwise fail with InvalidMethod. */
+  def method(method: String): Result[Method] =
+    ???
 
-  /* Extract user if it authorized */
-  def user(input: Input): Result[String] =
-    if (input.auth) Result.ok(input.user) else Result.fail(Unauthorized)
+  /*
+   * Route method and path to an implementation.
+   *
+   * A minimal implementation is:
+   *   GET /single -> n * 1
+   *   GET /double -> n * 2
+   *   GET /triple -> n * 3
+   *   PUT *       -> Unauthorized
+   *   POST *      -> Unauthorized
+   *   DELETE *    -> Unauthorized
+   *   *           -> NotFound
+   */
+  def route(method: Method, path: String): Result[Int => Int] =
+    ???
 
-  def answer(input: Input) =
+  /*
+   * Attempt to compute an `answer`, by:
+   *  - determining method
+   *  - selecting implementation
+   *  - determing request value
+   *  - using the implementation and request value to compute an answer.
+   */
+  def service(path: String, methodx: String, body: String): Result[Int] =
+    ???
+
+  /*
+   * Sometimes we always an `answer`, so default to 0 if
+   * our request failed in any way.
+   */
+  def run(path: String, method: String, body: String): Int =
     ???
 }

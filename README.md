@@ -3,8 +3,8 @@
 
 This is the base project for the workshop.
 
-__note__: please test your environment as soon as possible, but remember to grab the
-latest copy of this repository the day before the workshop with a `git pull origin master`.
+__note__: please test your environment before you arrive so we can get
+started quickly on the day.
 
 ### Core
 
@@ -24,13 +24,6 @@ and scala syntax.
 ### Challenge 1
 
 Implement the missing methods from the Result data type.
-
-Result is a straight forward sum-type with three cases:
- - An explosion (i.e. an exception from somewhere), or
- - A failure message, or
- - A success value
-
-It could be thought of as a newtype for: Exception \/ String \/ A.
 
 
 ### Challenge 2

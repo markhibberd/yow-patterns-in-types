@@ -35,4 +35,34 @@ object Challenge1Spec extends test.Spec {
     "fold with ok" ! prop((i: Int) =>
       Result.ok[Int](i).fold(_ => false, _ === i))
   }
+
+  "Example" should {
+    "single" ! {
+      Example.service("/single", "GET", "3") must_== Result.ok(3)
+    }
+    "double" ! {
+      Example.service("/double", "GET", "5") must_== Result.ok(10)
+    }
+    "triple" ! {
+      Example.service("/triple", "GET", "9") must_== Result.ok(27)
+    }
+    "handle invalid method" ! {
+      Example.service("/triple", "INVALID", "9") must_== Result.fail(InvalidMethod)
+    }
+    "handle invalid path" ! {
+      Example.service("/oops", "GET", "9") must_== Result.fail(NotFound)
+    }
+    "handle invalid request" ! {
+      Example.service("/triple", "GET", "huh?") must_== Result.fail(InvalidRequest)
+    }
+    "handle unathorized method" ! {
+      Example.service("/single", "POST", "8") must_== Result.fail(Unauthorized)
+    }
+    "default to 0 in failure" ! {
+      Example.run("oops", "GET", "1") must_== 0
+    }
+    "not default to 0 in success" ! {
+      Example.run("/double", "GET", "3") must_== 6
+    }
+  }
 }
