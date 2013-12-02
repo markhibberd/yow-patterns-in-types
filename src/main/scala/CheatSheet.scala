@@ -23,7 +23,7 @@ appear at the top-level (trait, class, object).
 Object declarations in Scala are similar to static method declarations in
 languages such as Java or C#. They are not invoked on a specific instance (as in
 a class or trait declaration). Unlike Java or C#, these static functions are
-declaration separately to a class or trait; that is, static functions belong in
+declared separately to a class or trait; that is, static functions belong in
 an object declaration, while instance values and methods appear in the class or
 trait.
 */
@@ -36,7 +36,7 @@ object CheatSheet {
   So we might say, a "var age is of the type Int." Following the name and type
   declaration is a value using the equals sign (=) followed by the value.
 
-  In functional programming, we generallyavoid  to the use of the var keyword,
+  In functional programming, we generally avoid the use of the var keyword,
   however, some use-cases might demand it for performance reasons. Other value
   declarations such as val and def are generally preferred.
   */

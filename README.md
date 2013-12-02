@@ -1,7 +1,7 @@
 # yow 2013
 ## Introduction to FP in Scala
 
-This is the base project for the workshow.
+This is the base project for the workshop.
 
 __note__: please test your environment as soon as possible, but remember to grab the
 latest copy of this repository the day before the workshop with a `git pull origin master`.
