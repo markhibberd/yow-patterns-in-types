@@ -120,8 +120,10 @@ object Warmup {
    * Reverse a list to produce a new list.
    *
    * scala> import warmup.Warmup._
-   * scala> reverse(List( 1, 2, 3, 4))
+   * scala> reverse(List(1, 2, 3, 4))
    * resX: List[Int] = List(4, 3, 2, 1)
+   * scala> reverse((1 to 50000).toList) take 5
+   * resX: List[Int] = List(50000, 49999, 49998, 49997, 49996)
    *
    * ~~~ Syntax hint: type annotations
    *
