@@ -136,10 +136,17 @@ object Warmup {
   /*
    * *Challenge* Exercise: 0.5:
    *
-   * Return a list of ranges.
+   * Return a list of ranges. A range is a pair of values for which each intermediate 
+   * value exists in the list. 
    *
    * scala> import warmup.Warmup._
-   * scala> ranges(List(1, 2, 3, 4, 7, 8, 9, 10, 30, 40, 41))
+   * scala> ranges(List(1, 1))
+   * resX: List[(Int, Int)] = List((1, 1))
+   * scala> ranges(List(1, 2, 3, 4))
+   * resX: List[(Int, Int)] = List((1, 4))
+   * scala> ranges(List(1, 2, 4))
+   * resX: List[(Int, Int)] = List((1, 2), List(4, 4))
+   * scala> ranges(List(2, 1, 3, 4, 9, 7, 8, 10, 30, 30, 4, 41))
    * resX: List[(Int, Int)] = List((1, 4), (7, 10), (30, 30), (40, 41))
    *
    * ~~~ library hint: use can just use List[A]#sorted to sort the list before you start.
