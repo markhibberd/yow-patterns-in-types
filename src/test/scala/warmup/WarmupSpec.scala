@@ -22,6 +22,14 @@ object WarmupSpec extends test.Spec {
       xs.forall(x => zs.contains(x)) && ys.forall(y => zs.contains(y))
     })
 
+    "append should be associative" ! prop((xs: List[Int], ys: List[Int], zs: List[Int]) =>
+      append(append(xs, ys), zs) == append(xs, append(ys, zs))
+    )
+
+    "append with Nil is identity" ! prop((xs: List[Int]) =>
+      append(xs, Nil) == xs
+    )
+
     "map should have length equal to input" ! prop((xs: List[Int], f: Int => Int) =>
       Warmup.length(Warmup.map(xs)(f)) == Warmup.length(xs))
 
