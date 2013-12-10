@@ -16,7 +16,6 @@ resolvers ++= Seq(
 scalacOptions := Seq(
   "-deprecation",
   "-unchecked",
-  "-optimise",
   "-Ywarn-all",
   "-Xlint",
   "-feature",
