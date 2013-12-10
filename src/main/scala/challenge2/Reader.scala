@@ -72,18 +72,19 @@ object Reader {
   /*
    * Exercise 2.6:
    *
-   * Implement monoid type class for Reader[R, A], given a monoid for A.
+   * Sequence, a list of Readers, to a Reader of Lists.
    */
+  def sequence[R, A](readers: List[Reader[R, A]]): Reader[R, List[A]] =
+    readers.foldRight(Reader.value[R, List[A]](Nil))((el, acc) =>
+      for { x <- el; xs <- acc } yield x :: xs)
+
   implicit def ReaderMonoid[R, A: Monoid]: Monoid[Reader[R, A]] =
     new Monoid[Reader[R, A]] {
       def zero: Reader[R, A] =
         value[R, A](Monoid[A].zero)
 
       def append(a: Reader[R, A], b: => Reader[R, A]) =
-        for {
-          aa <- a
-          bb <- b
-        } yield Monoid[A].append(aa, bb)
+        for { aa <- a; bb <- b } yield Monoid[A].append(aa, bb)
     }
 
 
@@ -103,17 +104,44 @@ object Reader {
 
 
 /*
- * *Challenge* Exercise 2.7: Header count.
+ * *Challenge* Exercise 2.7: Indirection.
+ *
+ * Lookup a specified config value, and then use its values
+ * as keys to look up a subsequent set of values.
  *
  * Complete the implementation, some of the methods are provided
  * fill in the remainder, to complete the spec.
  */
 object Example {
+  case class ConfigEntry(name: String, values: List[String])
+  case class Config(data: List[ConfigEntry])
 
-  case class Header(name: String, value: String)
+  /*
+   * For a single name, lookup all of the direct values for that name.
+   *
+   * Libraries available:
+   *   - The Reader.* libraries
+   *   - List[A] has `find` method that will provide a Option[A]
+   *   - Option[A] has a `getOrElse` method similar to challenge1.Result
+   *
+   * Hint: Starting with Reader.ask will help.
+   */
+  def direct(name: String): Reader[Config, List[String]] =
+    Reader.ask[Config] map (_.data.find(_.name == name).map(_.values).getOrElse(Nil))
 
-
-  def find: Reader[List[Header], Option[Header]] =
-    ???
-
+  /*
+   * For a single name, lookup all of the indirect values, that
+   * is those values whose key is a one of the direct values of
+   * the specified name.
+   *
+   * Libraries available:
+   *   - List[List[A]].flatten will produce a List[A].
+   *
+   * Hint: Starting with Reader.sequence will be important.
+   */
+  def indirect(name: String): Reader[Config, List[String]] =
+    for {
+      xs <- direct(name)
+      ys <- Reader.sequence(xs.map(direct))
+    } yield ys.flatten
 }
