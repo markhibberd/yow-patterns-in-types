@@ -55,7 +55,7 @@ object Challenge1Spec extends test.Spec {
     "handle invalid request" ! {
       Example.service("/triple", "GET", "huh?") must_== Result.fail(InvalidRequest)
     }
-    "handle unathorized method" ! {
+    "handle unauthorized method" ! {
       Example.service("/single", "POST", "8") must_== Result.fail(Unauthorized)
     }
     "default to 0 in failure" ! {
