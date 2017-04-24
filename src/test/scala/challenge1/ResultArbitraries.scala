@@ -1,18 +1,19 @@
 package challenge1
 
-import org.scalacheck.{Arbitrary, Gen}, Arbitrary._, Gen._
+import org.scalacheck.{Arbitrary, Gen}
+import Arbitrary._
+import Gen._
 
 object ResultArbitraries {
   import Result._
 
   implicit def ErrorArbitrary: Arbitrary[Error] =
-    Arbitrary(oneOf(
+    Arbitrary(oneOf(oneOf(
       NotFound,
       InvalidRequest,
       InvalidMethod,
-      Unauthorized,
-      (arbitrary[Throwable] map Explosion)
-    ))
+      Unauthorized
+    ), arbitrary[Throwable] map Explosion))
 
   implicit def ResultArbitrary[A: Arbitrary]: Arbitrary[Result[A]] =
     Arbitrary(frequency(
